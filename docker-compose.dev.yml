@@ -1,7 +1,5 @@
 version: '3.9'
 
-name: odoo-gaolamthuy-prod
-
 services:
   odoo-gaolamthuy-dev-db:
     container_name: odoo-gaolamthuy-dev-db
@@ -40,18 +38,3 @@ services:
       - ./addons:/mnt/extra-addons
       - ./etc:/etc/odoo
     restart: always             # run as a service
-  
-  caddy:
-    image: caddy:latest
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy-data:/data
-      - caddy-config:/config
-    restart: always
-
-volumes:
-  caddy-data:
-  caddy-config:

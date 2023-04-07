@@ -1,7 +1,5 @@
 version: '3.9'
 
-name: odoo-gaolamthuy-stage
-
 services:
   odoo-gaolamthuy-stage-db:
     container_name: odoo-gaolamthuy-stage-db
