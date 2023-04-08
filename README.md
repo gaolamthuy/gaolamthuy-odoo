@@ -17,6 +17,22 @@ sudo chmod -R 777 ~/gaolamthuy-odoo16/addons
 
 ## Staging environments
 
+First time setup
+```bash
+sudo git clone -b staging https://github.com/gaolamthuy/gaolamthuy-odoo16.git
+```
+
+```bash
+sudo nano ~/gaolamthuy-odoo16/.env
+```
+
+*Add stack to caddy network*
+
+CD
+```bash
+sudo git pull
+```
+
 ```bash
 sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.stage.yml -p "odoo-gaolamthuy-stage" up --build --force-recreate -d
 ```
