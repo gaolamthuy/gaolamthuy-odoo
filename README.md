@@ -10,9 +10,6 @@ sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.dev.yml -p "odoo-gaola
 
 ```bash
 sudo mkdir -p ~/gaolamthuy-odoo16/postgresql && 
-sudo mkdir -p ~/gaolamthuy-odoo16/postgresql/dev && 
-sudo mkdir -p ~/gaolamthuy-odoo16/postgresql/stage && 
-sudo mkdir -p ~/gaolamthuy-odoo16/postgresql/prod && 
 sudo chmod -R 777 ~/gaolamthuy-odoo16/postgresql &&
 sudo chmod -R 777 ~/gaolamthuy-odoo16/etc && 
 sudo chmod -R 777 ~/gaolamthuy-odoo16/addons

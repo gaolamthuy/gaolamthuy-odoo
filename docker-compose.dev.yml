@@ -11,7 +11,7 @@ services:
       - POSTGRES_DB=postgres
     restart: always             # run as a service
     volumes:
-        - ./postgresql/dev:/var/lib/postgresql/data
+        - ./postgresql:/var/lib/postgresql/data
 
   odoo-gaolamthuy-dev-app:
     container_name: odoo-gaolamthuy-dev-app
@@ -36,5 +36,5 @@ services:
       #- /etc/localtime:/etc/localtime:ro
       # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
       - ./addons:/mnt/extra-addons
-      - ./etc/dev:/etc/odoo
+      - ./etc:/etc/odoo
     restart: always             # run as a service
