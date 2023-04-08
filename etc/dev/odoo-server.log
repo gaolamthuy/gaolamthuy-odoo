@@ -952,3 +952,5 @@ psycopg2.OperationalError: connection to server at "odoo-gaolamthuy-dev-db" (172
 2023-04-08 09:01:18,805 1 INFO local-odoo werkzeug: 172.28.0.1 - - [08/Apr/2023 09:01:18] "POST /web/dataset/call_kw/ir.module.module/get_views HTTP/1.1" 200 - 37 0.012 0.025
 2023-04-08 09:01:18,826 1 INFO local-odoo werkzeug: 172.28.0.1 - - [08/Apr/2023 09:01:18] "POST /web/dataset/call_kw/ir.module.module/web_search_read HTTP/1.1" 200 - 4 0.002 0.005
 2023-04-08 09:01:18,848 1 INFO local-odoo werkzeug: 172.28.0.1 - - [08/Apr/2023 09:01:18] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 44 0.017 0.013
+2023-04-08 09:09:38,301 1 INFO local-odoo odoo.addons.base.models.ir_cron: Starting job `payment: post-process transactions`. 
+2023-04-08 09:09:38,306 1 INFO local-odoo odoo.addons.base.models.ir_cron: Job `payment: post-process transactions` done. 
