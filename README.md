@@ -39,7 +39,7 @@ sudo git clone -b staging https://github.com/gaolamthuy/gaolamthuy-odoo16.git
 sudo nano ~/gaolamthuy-odoo16/.env
 ```
 
-*Add stack to caddy network*
+*Add stack to caddy network* - test gh actions
 
 CD
 ```bash
