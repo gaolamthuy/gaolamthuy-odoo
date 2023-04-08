@@ -1,6 +1,12 @@
 name: remote ssh command
-on: [merge]
+on:
+  pull_request:
+    types:
+      - closed
+
 jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
   build:
     name: Deploy to server
     runs-on: ubuntu-latest
