@@ -1,9 +1,9 @@
 name: production deploy
 on:
-  pull_request:
-    branches: 
-      - main
-    types: [closed]
+  # pull_request:
+  #   branches: 
+  #     - main
+  #   types: [closed]
   push:
     branches:
       - main
