@@ -32,11 +32,28 @@ sudo rm -rf ~/gaolamthuy-odoo16/postgresql
 
 First time setup
 ```bash
-sudo git clone -b staging https://github.com/gaolamthuy/gaolamthuy-odoo16.git
+sudo git clone -b staging https://github.com/gaolamthuy/gaolamthuy-odoo16.git ~/gaolamthuy-odoo16-stage
 ```
 
 ```bash
-sudo nano ~/gaolamthuy-odoo16/.env
+sudo nano ~/gaolamthuy-odoo16-stage/.env
+```
+
+```bash
+sudo mkdir -p ~/gaolamthuy-odoo16-stage/postgresql && 
+sudo mkdir -p ~/gaolamthuy-odoo16-stage/etc &&
+sudo mkdir -p ~/gaolamthuy-odoo16-stage/addons &&
+sudo chmod -R 777 ~/gaolamthuy-odoo16-stage/postgresql &&
+sudo chmod -R 777 ~/gaolamthuy-odoo16-stage/etc && 
+sudo chmod -R 777 ~/gaolamthuy-odoo16-stage/addons
+```
+
+```bash
+sudo docker-compose -f ~/gaolamthuy-odoo16-stage/docker-compose.stage.yml -p "odoo-gaolamthuy-stage" up --build --force-recreate -d
+```
+
+```bash
+sudo docker-compose -f ~/gaolamthuy-odoo16-stage/docker-compose.stage.yml -p "odoo-gaolamthuy-stage" down
 ```
 
 *Add stack to caddy network* - test gh actions
@@ -46,31 +63,41 @@ CD
 sudo git pull
 ```
 
-```bash
-sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.stage.yml -p "odoo-gaolamthuy-stage" up --build --force-recreate -d
-```
-
-```bash
-sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.stage.yml -p "odoo-gaolamthuy-stage" down
-```
 
 ## Production environments
 
 First time deploy
 
 ```bash
-sudo chmod -R 777 ~/gaolamthuy-odoo16/addons && 
-sudo chmod -R 777 ~/gaolamthuy-odoo16/etc && 
-sudo mkdir -p ~/gaolamthuy-odoo16/postgresql && 
-sudo chmod -R 777 ~/gaolamthuy-odoo16/postgresql && 
-sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.prod.yml up -d
+sudo git clone https://github.com/gaolamthuy/gaolamthuy-odoo16.git ~/gaolamthuy-odoo16-prod
 ```
 
 ```bash
-sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.prod.yml -p "odoo-gaolamthuy-prod" up --build --force-recreate -d
+sudo nano ~/gaolamthuy-odoo16-prod/.env
 ```
 
 ```bash
-sudo nano ~/gaolamthuy-odoo16/.env
+sudo mkdir -p ~/gaolamthuy-odoo16-prod/postgresql && 
+sudo mkdir -p ~/gaolamthuy-odoo16-prod/etc &&
+sudo mkdir -p ~/gaolamthuy-odoo16-prod/addons &&
+sudo chmod -R 777 ~/gaolamthuy-odoo16-prod/postgresql &&
+sudo chmod -R 777 ~/gaolamthuy-odoo16-prod/etc && 
+sudo chmod -R 777 ~/gaolamthuy-odoo16-prod/addons
 ```
+
+```bash
+sudo docker-compose -f ~/gaolamthuy-odoo16-prod/docker-compose.prod.yml -p "odoo-gaolamthuy-prod" up --build --force-recreate -d
+```
+```bash
+sudo docker-compose -f ~/gaolamthuy-odoo16-stage/docker-compose.prod.yml -p "odoo-gaolamthuy-prod" down
+```
+
+
+*Add stack to caddy network* - test gh actions
+
+CD
+```bash
+sudo git pull
+```
+
 
