@@ -1,9 +1,16 @@
 version: '3.9'
 
+networks:
+  odoo-gaolamthuy-prod:
+    name: odoo-gaolamthuy-prod
+    driver: bridge
+
 services:
   odoo-gaolamthuy-prod-db:
     container_name: odoo-gaolamthuy-prod-db
     image: postgres:15
+    networks:
+      - odoo-gaolamthuy-prod
     user: root
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -16,6 +23,8 @@ services:
   odoo-gaolamthuy-prod-app:
     container_name: odoo-gaolamthuy-prod-app
     image: odoo:16
+    networks:
+      - odoo-gaolamthuy-prod
     user: root
     depends_on:
       - odoo-gaolamthuy-prod-db

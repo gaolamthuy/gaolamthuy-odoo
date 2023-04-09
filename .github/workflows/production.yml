@@ -20,6 +20,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            sudo git -C ~/${{ github.event.repository.name }} restore .
-            sudo git -C ~/${{ github.event.repository.name }} pull 
-            sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.prod.yml -p "odoo-gaolamthuy-prod" up --build --force-recreate -d
+            sudo git -C ~/${{ github.event.repository.name }}-prod restore .
+            sudo git -C ~/${{ github.event.repository.name }}-prod pull 
+            sudo docker-compose -f ~/${{ github.event.repository.name }}-prod/docker-compose.prod.yml -p "odoo-gaolamthuy-prod" up --build --force-recreate -d

@@ -1,9 +1,16 @@
 version: '3.9'
 
+networks:
+  odoo-gaolamthuy-stage:
+    name: odoo-gaolamthuy-stage
+    driver: bridge
+
 services:
   odoo-gaolamthuy-stage-db:
     container_name: odoo-gaolamthuy-stage-db
     image: postgres:15
+    networks:
+      - odoo-gaolamthuy-stage
     user: root
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -16,6 +23,8 @@ services:
   odoo-gaolamthuy-stage-app:
     container_name: odoo-gaolamthuy-stage-app
     image: odoo:16
+    networks:
+      - odoo-gaolamthuy-stage
     user: root
     depends_on:
       - odoo-gaolamthuy-stage-db
