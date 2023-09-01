@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  odoo-app:
+    extends:
+      file: docker-compose.yml
+      service: odoo-app
+    ports:
+      - "${APP_PORT:-8069}:8069"
+      - "${CHAT_PORT:-8072}:8072" # live chat
+    networks:
+      - caddy
+    labels:
+      caddy: ${STAGE_DOMAIN:-domain.com}
+      caddy.reverse_proxy: "{{upstreams 8069}}"
+
+networks:
+  caddy:
+    external: true

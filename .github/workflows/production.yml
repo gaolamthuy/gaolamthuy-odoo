@@ -1,12 +1,12 @@
 name: production deploy
 on:
-  # pull_request:
-  #   branches: 
-  #     - main
-  #   types: [closed]
-  push:
+  pull_request:
     branches:
-      - main
+      - production
+    # types: [closed]
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   prod-deploy:
@@ -15,11 +15,28 @@ jobs:
     steps:
       - name: git pull && docker-compose up
         uses: appleboy/ssh-action@master
-        with: 
-          host: ${{ secrets.HOST }}
+        with:
+          host: ${{ secrets.HOST_PROD }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            sudo git -C ~/${{ github.event.repository.name }}-prod restore .
-            sudo git -C ~/${{ github.event.repository.name }}-prod pull 
-            sudo docker-compose -f ~/${{ github.event.repository.name }}-prod/docker-compose.prod.yml -p "odoo-gaolamthuy-prod" up --build --force-recreate -d
+
+            # Checkout to production branch
+            git checkout production
+
+            # Remove the old .env file if it exists
+            sudo rm -f ~/${{ github.event.repository.name }}/.env
+
+            # Create a new .env file with secrets
+            echo "${{ secrets.DOTENV }}" | sudo tee -a ~/${{ github.event.repository.name }}/.env
+
+            # Add any additional deployment commands
+            sudo echo "Deploying via SSH..."
+            git -C './${{ github.event.repository.name }}' pull || git clone https://github.com/${{github.repository}}.git './${{ github.event.repository.name }}'
+
+            # Add any additional commands for deployment
+            cd ~/${{ github.event.repository.name }}
+            sudo docker system prune -f
+            sudo docker image prune -a --force
+            sudo docker compose up --build --force-recreate --no-deps -d
+            echo "done"

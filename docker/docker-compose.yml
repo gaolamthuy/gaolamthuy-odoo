@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  postress-db:
+    container_name: postress-db
+    image: postgres:15
+    user: root
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-my-odoo}
+      - POSTGRES_USER=${DB_USER:-my-odoo}
+      - POSTGRES_DB=postgres
+    restart: always # run as a service
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+
+  odoo-app:
+    container_name: odoo-app
+    image: odoo:16
+    user: root
+    depends_on:
+      - postress-db
+    tty: true
+    command: --
+    #    command: odoo scaffold /mnt/extra-addons/custom_module
+    environment:
+      - HOST=postress-db
+      - USER=${DB_USER:-my-odoo}
+      - PASSWORD=${DB_PASSWORD:-my-odoo}
+    volumes:
+      #- /etc/timezone:/etc/timezone:ro
+      #- /etc/localtime:/etc/localtime:ro
+      # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    restart: always # run as a service
