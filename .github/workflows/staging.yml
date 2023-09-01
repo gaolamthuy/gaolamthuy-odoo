@@ -35,5 +35,5 @@ jobs:
             cd ~/${{ github.event.repository.name }}
             sudo docker system prune -f
             sudo docker image prune -a --force
-            sudo docker compose up --build --force-recreate --no-deps -d
+            docker compose -p my-odoo-v16 -f docker/docker-compose.yml up -d
             echo "done"
