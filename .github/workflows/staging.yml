@@ -27,10 +27,15 @@ jobs:
             # Checkout to main branch
             git checkout main
 
+            # Create folders
+            mkdir -p ~/${{ github.event.repository.name }}/postgresql
+            mkdir -p ~/${{ github.event.repository.name }}/etc
+            mkdir -p ~/${{ github.event.repository.name }}/addons
+
             # Gain permisson for all folder
-            sudo chmod -R 777 postgresql
-            sudo chmod -R 777 etc
-            sudo chmod -R 777 addons
+            sudo chmod -R 777 ~/${{ github.event.repository.name }}/postgresql
+            sudo chmod -R 777 ~/${{ github.event.repository.name }}/etc
+            sudo chmod -R 777 ~/${{ github.event.repository.name }}/addons
 
             # Remove the old .env file if it exists
             sudo rm -f ~/${{ github.event.repository.name }}/.env
