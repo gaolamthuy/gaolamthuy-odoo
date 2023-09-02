@@ -1,34 +1,26 @@
-version: "3.9"
-
+version: "2"
 services:
   db:
-    container_name: db
-    image: postgres:${PG_VERSION:-15}
+    image: postgres:15
     user: root
     environment:
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo16@2022
       - POSTGRES_DB=postgres
-    networks:
-      - caddy
     restart: always # run as a service
     volumes:
-      - .././postgresql:/var/lib/postgresql/data
+      - ./postgresql:/var/lib/postgresql/data
 
-  odoo-app:
-    container_name: odoo-app
-    image: odoo:${ODOO_VERSION:-16}
+  odoo16:
+    image: odoo:16
     user: root
     depends_on:
       - db
     ports:
       - "10016:8069"
       - "20016:8072" # live chat
-    networks:
-      - caddy
     tty: true
     command: --
-    #    command: odoo scaffold /mnt/extra-addons/custom_module
     environment:
       - HOST=db
       - USER=odoo
@@ -37,10 +29,6 @@ services:
       #- /etc/timezone:/etc/timezone:ro
       #- /etc/localtime:/etc/localtime:ro
       # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
-      - .././addons:/mnt/extra-addons
-      - .././etc:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
     restart: always # run as a service
-
-networks:
-  caddy:
-    external: true
