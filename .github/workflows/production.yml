@@ -21,22 +21,37 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
 
-            # Checkout to production branch
-            git checkout production
-
-            # Remove the old .env file if it exists
-            sudo rm -f ~/${{ github.event.repository.name }}/.env
-
-            # Create a new .env file with secrets
-            echo "${{ secrets.DOTENV }}" | sudo tee -a ~/${{ github.event.repository.name }}/.env
-
             # Add any additional deployment commands
             sudo echo "Deploying via SSH..."
             git -C './${{ github.event.repository.name }}' pull || git clone https://github.com/${{github.repository}}.git './${{ github.event.repository.name }}'
 
-            # Add any additional commands for deployment
+            # Checkout to main branch
             cd ~/${{ github.event.repository.name }}
+
+            # Checkout to main branch
+            git checkout production
+
+            # Create folders
+            mkdir -p postgresql/
+            mkdir -p etc/
+            mkdir -p addons/
+
+            # Gain permisson for all folder
+            sudo chmod -R 777 postgresql/
+            sudo chmod -R 777 etc/
+            sudo chmod -R 777 addons/
+
+            # Remove the old .env file if it exists
+            sudo rm -f .env
+            # Create a new .env file with secrets
+            echo "${{ secrets.DOTENV }}" | sudo tee -a .env
+
+            # Run docker compose as production
+            docker compose -p ${{ github.event.repository.name }} -f ./docker-compose.yml -f ./docker-compose.prod.yml up -d
+
             sudo docker system prune -f
             sudo docker image prune -a --force
-            sudo docker compose up --build --force-recreate --no-deps -d
+
+            sudo chmod -R 777 postgresql/
+
             echo "done"

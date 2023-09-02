@@ -1,7 +1,6 @@
 version: "3.9"
 services:
   postgres-db:
-    container_name: postgres-db
     image: postgres:${PG_VERSION:-15}
     user: root
     environment:
@@ -13,7 +12,6 @@ services:
       - ./postgresql:/var/lib/postgresql/data
 
   odoo-app:
-    container_name: odoo-app
     image: odoo:${ODOO_VERSION:-16}
     user: root
     depends_on:
