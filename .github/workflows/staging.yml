@@ -42,10 +42,6 @@ jobs:
             # Create a new .env file with secrets
             echo "${{ secrets.DOTENV }}" | sudo tee -a ~/${{ github.event.repository.name }}/.env
 
-            # Add any additional commands for deployment
-            sudo docker system prune -f
-            sudo docker image prune -a --force
-
             # Run docker compose
             # docker compose \
             #   -p ${{ github.event.repository.name }} \
@@ -55,5 +51,8 @@ jobs:
             #   up -d
 
             docker compose -p ${{ github.event.repository.name }} -f docker/docker-compose.yml --env-file ./.env up -d
+
+            sudo docker system prune -f
+            sudo docker image prune -a --force
 
             echo "done"
