@@ -11,7 +11,7 @@ services:
       - POSTGRES_DB=postgres
     restart: always # run as a service
     volumes:
-      - ./postgresql:/var/lib/postgresql/data
+      - .././postgresql:/var/lib/postgresql/data
 
   odoo-app:
     container_name: odoo-app
@@ -30,6 +30,6 @@ services:
       #- /etc/timezone:/etc/timezone:ro
       #- /etc/localtime:/etc/localtime:ro
       # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
-      - ./addons:/mnt/extra-addons
-      - ./etc:/etc/odoo
+      - .././addons:/mnt/extra-addons
+      - .././etc:/etc/odoo
     restart: always # run as a service
