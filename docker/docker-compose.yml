@@ -9,6 +9,8 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD:-my-odoo}
       - POSTGRES_USER=${DB_USER:-my-odoo}
       - POSTGRES_DB=postgres-db
+    networks:
+      - caddy
     restart: always # run as a service
     volumes:
       - .././postgresql:/var/lib/postgresql/data
@@ -19,6 +21,11 @@ services:
     user: root
     depends_on:
       - postgres-db
+    ports:
+      - "10016:8069"
+      - "20016:8072" # live chat
+    networks:
+      - caddy
     tty: true
     command: --
     #    command: odoo scaffold /mnt/extra-addons/custom_module
@@ -33,3 +40,7 @@ services:
       - .././addons:/mnt/extra-addons
       - .././etc:/etc/odoo
     restart: always # run as a service
+
+networks:
+  caddy:
+    external: true

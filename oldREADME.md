@@ -1,6 +1,6 @@
 # hophamlam/my-odoo
 
-test-run-6
+`scp hophamlam@hypercorevn-1.hophamlam.com:~/my-odoo-v16/etc/odoo-server.log .`
 
 This Odoo repo is built from [minhng92/odoo-13-docker-compose](https://github.com/minhng92/odoo-13-docker-compose) and include some of my features:
 

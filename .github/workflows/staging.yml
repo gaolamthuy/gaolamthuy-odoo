@@ -47,11 +47,13 @@ jobs:
             sudo docker image prune -a --force
 
             # Run docker compose
-            docker compose \
-              -p ${{ github.event.repository.name }} \
-              -f docker/docker-compose.yml \
-              -f docker/docker-compose.stage.yml \
-              --env-file ./.env \
-              up -d
+            # docker compose \
+            #   -p ${{ github.event.repository.name }} \
+            #   -f docker/docker-compose.yml \
+            #   -f docker/docker-compose.stage.yml \
+            #   --env-file ./.env \
+            #   up -d
+
+            docker compose -p ${{ github.event.repository.name }} -f docker/docker-compose.yml --env-file ./.env up -d
 
             echo "done"
