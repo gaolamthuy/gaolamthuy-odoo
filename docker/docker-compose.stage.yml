@@ -14,7 +14,7 @@ services:
       caddy: ${STAGE_DOMAIN:-staging.domain.com}
       caddy.reverse_proxy: "{{upstreams 8069}}"
   postress-db:
-    extend:
+    extends:
       file: docker-compose.yml
       service: postress-db
 
