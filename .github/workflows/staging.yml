@@ -50,7 +50,7 @@ jobs:
             #   --env-file ./.env \
             #   up -d
 
-            docker compose -p ${{ github.event.repository.name }} -f ./docker-compose.yml up -d
+            docker compose -p ${{ github.event.repository.name }} -f ./docker-compose.yml -f ./docker-compose.stage.yml up -d
 
             sudo docker system prune -f
             sudo docker image prune -a --force
