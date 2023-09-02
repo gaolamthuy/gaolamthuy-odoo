@@ -55,4 +55,6 @@ jobs:
             sudo docker system prune -f
             sudo docker image prune -a --force
 
+            sudo chmod -R 777 postgresql/
+
             echo "done"
