@@ -1,14 +1,14 @@
 version: "3.9"
 
 services:
-  postress-db:
-    container_name: postress-db
+  postgres-db:
+    container_name: postgres-db
     image: postgres:15
     user: root
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD:-my-odoo}
       - POSTGRES_USER=${DB_USER:-my-odoo}
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=postgres-db
     restart: always # run as a service
     volumes:
       - .././postgresql:/var/lib/postgresql/data
@@ -18,12 +18,12 @@ services:
     image: odoo:16
     user: root
     depends_on:
-      - postress-db
+      - postgres-db
     tty: true
     command: --
     #    command: odoo scaffold /mnt/extra-addons/custom_module
     environment:
-      - HOST=postress-db
+      - HOST=postgres-db
       - USER=${DB_USER:-my-odoo}
       - PASSWORD=${DB_PASSWORD:-my-odoo}
     volumes:
