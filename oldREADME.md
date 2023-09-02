@@ -1,5 +1,7 @@
 # hophamlam/my-odoo
 
+test-run-6
+
 This Odoo repo is built from [minhng92/odoo-13-docker-compose](https://github.com/minhng92/odoo-13-docker-compose) and include some of my features:
 
 - Multi version
