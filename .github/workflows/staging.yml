@@ -19,7 +19,7 @@ jobs:
 
             # Add any additional deployment commands
             sudo echo "Deploying via SSH..."
-            git -C './${{ github.event.repository.name }}' pull || git clone https://github.com/${{github.repository}}.git './${{ github.event.repository.name }}'
+            git -C '~/${{ github.event.repository.name }}' pull || git clone https://github.com/${{github.repository}}.git '~/${{ github.event.repository.name }}'
 
             # Checkout to main branch
             cd ~/${{ github.event.repository.name }}
