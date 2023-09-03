@@ -10,8 +10,8 @@ services:
       - caddy
     labels:
       caddy: ${STAGE_DOMAIN:-domain.com}
-      caddy.reverse_proxy: "http:hypercorevn-1.hophamlam.com:10016"
-      caddy.reverse_proxy_1: "/longpolling/* http:hypercorevn-1.hophamlam.com:20016"
+      caddy.reverse_proxy: "http://hypercorevn-1.hophamlam.com:10016"
+      caddy.reverse_proxy_1: "/longpolling/* http://hypercorevn-1.hophamlam.com:20016"
       caddy.reverse_proxy.header_up: "X-Forwarded-Proto https"
       caddy.reverse_proxy.header_up_1: "X-Forwarded-Host {host}"
       caddy.reverse_proxy.header_up_2: "X-Url-Scheme {scheme}"
