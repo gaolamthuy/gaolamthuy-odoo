@@ -4,8 +4,8 @@ services:
   odoo-app:
     container_name: odoo-app-${STAGE_DOMAIN:-domain.com}
     expose:
-      - "${APP_PORT:-8069}"
-      - "${CHAT_PORT:-8072}" # live chat
+      - "8069"
+      - "8072" # live chat
     networks:
       - caddy
     labels:

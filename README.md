@@ -1,6 +1,6 @@
 ## Local development environments
 
-docker compose -p my-odoo-16 -f docker/docker-compose.dev.yml up -d
+docker compose -p my-odoo-16 -f docker-compose.yml -f docker-compose.dev. up -d
 
 ```bash
 sudo docker-compose -f ~/gaolamthuy-odoo16/docker-compose.dev.yml -p "odoo-gaolamthuy-dev" up --build --force-recreate -d
