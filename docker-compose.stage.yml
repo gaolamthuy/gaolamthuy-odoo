@@ -11,12 +11,12 @@ services:
     labels:
       caddy: ${STAGE_DOMAIN:-domain.com}
       caddy.reverse_proxy: "{{upstreams 8069}}"
-      caddy.reverse_proxy.header_up: "X-Forwarded-Proto https X-Forwarded-Host {host} X-Url-Scheme {scheme} X-Real-IP {remote}"
-      caddy.reverse_proxy_1: "/longpolling/* {{upstreams 8072}}"
-      caddy.encode: "gzip zstd"
+      # caddy.reverse_proxy.header_up: "X-Forwarded-Proto https X-Forwarded-Host {host} X-Url-Scheme {scheme} X-Real-IP {remote}"
+      # caddy.reverse_proxy_1: "/longpolling/* {{upstreams 8072}}"
+      # caddy.encode: "gzip zstd"
       caddy.header: "/ Content-Security-Policy 'upgrade-insecure-requests;'"
-      caddy.file_server:
-      caddy.log:
+      # caddy.file_server:
+      # caddy.log:
 
   postgres-db:
     container_name: postgres-db-${STAGE_DOMAIN:-staging.domain.com}
