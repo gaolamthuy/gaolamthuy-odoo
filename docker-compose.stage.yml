@@ -15,7 +15,7 @@ services:
       # caddy.reverse_proxy.header_up: X-Forwarded-Host {host}
       # caddy.reverse_proxy.header_up: X-Url-Scheme {scheme}
       # caddy.reverse_proxy.header_up: X-Real-IP {remote}
-      caddy.reverse_proxy: "/longpolling/* {{upstreams 8072}}"
+      # caddy.reverse_proxy: "/longpolling/* {{upstreams 8072}}"
       # caddy.header: / Content-Security-Policy "upgrade-insecure-requests;"
 
   postgres-db:
