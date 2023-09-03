@@ -11,10 +11,10 @@ services:
     labels:
       caddy: ${STAGE_DOMAIN:-domain.com}
       caddy.reverse_proxy: "{{upstreams 8069}}"
-      caddy.reverse_proxy.header_up: "X-Forwarded-Proto https"
-      caddy.reverse_proxy.header_up: "X-Forwarded-Host {host}"
-      caddy.reverse_proxy.header_up: "X-Url-Scheme {scheme}"
-      caddy.reverse_proxy.header_up: "X-Real-IP {remote}"
+      caddy.reverse_proxy.header_up_1: "X-Forwarded-Proto https"
+      caddy.reverse_proxy.header_up_2: "X-Forwarded-Host {host}"
+      caddy.reverse_proxy.header_up_3: "X-Url-Scheme {scheme}"
+      caddy.reverse_proxy.header_up_4: "X-Real-IP {remote}"
       # caddy.reverse_proxy_1: "/longpolling/* {{upstreams 8072}}"
       # caddy.encode: "gzip zstd"
       caddy.header: "/ Content-Security-Policy 'upgrade-insecure-requests;'"
