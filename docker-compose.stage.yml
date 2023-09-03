@@ -17,7 +17,7 @@ services:
       caddy.reverse_proxy.header_up_2: "X-Url-Scheme {scheme}"
       caddy.reverse_proxy.header_up_3: "X-Real-IP {remote}"
       # caddy.encode: "gzip zstd"
-      caddy.header: "/ Content-Security-Policy 'upgrade-insecure-requests;'"
+      caddy.header: "/ {Content-Security-Policy 'upgrade-insecure-requests;'}"
       # caddy.file_server:
       # caddy.log:
 
