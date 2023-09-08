@@ -19,14 +19,10 @@ jobs:
 
             # Add any additional deployment commands
             sudo echo "Deploying via SSH..."
-            git -C './${{ github.event.repository.name }}' pull || git clone https://github.com/${{github.repository}}.git './${{ github.event.repository.name }}'
+            git -C './${{ github.event.repository.name }}-stage' pull origin main || git clone -b main https://github.com/${{github.repository}}.git './${{ github.event.repository.name }}-stage'
 
             # Checkout to main branch
-            cd ~/${{ github.event.repository.name }}
-
-            # Checkout to main branch
-            git checkout main
-            git pull
+            cd ~/${{ github.event.repository.name }}-stage
 
             # Create folders
             mkdir -p postgresql/
