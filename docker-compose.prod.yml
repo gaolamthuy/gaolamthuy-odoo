@@ -2,18 +2,23 @@ version: "3.9"
 
 services:
   odoo-app:
-    container_name: odoo-app-${STAGE_DOMAIN:-domain.com}
-    expose:
-      - "8069"
-      - "8072" # live chat
+    container_name: odoo-app-${PROD_DOMAIN:-domain.com}
+    # ports:
+    #   - "${APP_PORT:-8069}:8069"
+    #   - "${CHAT_PORT:-8072}:8072" # live chat
     networks:
       - caddy
     labels:
-      caddy: ${STAGE_DOMAIN:-domain.com}
+      caddy: ${PROD_DOMAIN:-domain.com}, ${BETA_DOMAIN:-beta.domain.com}
       caddy.reverse_proxy: "{{upstreams 8069}}"
+      caddy.reverse_proxy_1: "/longpolling/* {{upstreams 8072}}"
+      caddy.encode: "gzip zstd"
+      caddy.header: "/ Content-Security-Policy 'upgrade-insecure-requests;'"
+      # caddy.file_server:
+      caddy.log:
 
   postgres-db:
-    container_name: postgres-db-${STAGE_DOMAIN:-staging.domain.com}
+    container_name: postgres-db-${PROD_DOMAIN:-domain.com}
     networks:
       - caddy
 
