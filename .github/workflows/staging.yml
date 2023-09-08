@@ -43,7 +43,7 @@ jobs:
             echo "${{ secrets.DOTENV }}" | sudo tee -a .env
 
             # Run docker compose as staging
-            docker compose -p ${{ github.event.repository.name }} -f ./docker-compose.yml -f ./docker-compose.stage.yml up -d --build --force-recreate
+            docker compose -p ${{ github.event.repository.name }}-stage -f ./docker-compose.yml -f ./docker-compose.stage.yml up -d --build --force-recreate
 
             docker system prune --volumes --force
 
