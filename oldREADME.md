@@ -1,8 +1,10 @@
 # hophamlam/my-odoo
 
+`scp hophamlam@hypercorevn-1.hophamlam.com:~/my-odoo-v16/etc/odoo-server.log .`
+
 This Odoo repo is built from [minhng92/odoo-13-docker-compose](https://github.com/minhng92/odoo-13-docker-compose) and include some of my features:
 
-- Multi version 
+- Multi version
 - `.env` with custom variables
 - `CI/CD` using `Github Actions`
 - `Production` ready (not too stressful 🤣🤣)
@@ -10,22 +12,23 @@ This Odoo repo is built from [minhng92/odoo-13-docker-compose](https://github.co
 That's it, let's take a look!
 
 # Prerequisites
+
 - Recommended OS: Linux Ubuntu 20.04 LTS with at least 2GB RAM.
 - Have basic understanding [Odoo](https://www.odoo.com/).
 - [Docker](https://www.docker.com/) and [Docker-compose](https://docs.docker.com/compose/) installed (Check [my repo](https://github.com/hophamlam/initial-server) for initial server).
 
 # First time setup
 
-This will execute `sudo nano ~/my-odoo/.env` and bring you to `nano editor`, input yours or check my `.env`. 
+This will execute `sudo nano ~/my-odoo/.env` and bring you to `nano editor`, input yours or check my `.env`.
 
 ```bash
-sudo git clone https://github.com/hophamlam/my-odoo.git && 
-sudo nano ~/my-odoo/.env && 
-sudo nano ~/my-odoo/etc/odoo.conf && 
-sudo chmod -R 777 ~/my-odoo/addons && 
-sudo chmod -R 777 ~/my-odoo/etc && 
-sudo mkdir -p ~/my-odoo/postgresql && 
-sudo chmod -R 777 ~/my-odoo/postgresql && 
+sudo git clone https://github.com/hophamlam/my-odoo.git &&
+sudo nano ~/my-odoo/.env &&
+sudo nano ~/my-odoo/etc/odoo.conf &&
+sudo chmod -R 777 ~/my-odoo/addons &&
+sudo chmod -R 777 ~/my-odoo/etc &&
+sudo mkdir -p ~/my-odoo/postgresql &&
+sudo chmod -R 777 ~/my-odoo/postgresql &&
 sudo docker-compose -f ~/my-odoo/docker-compose.yml up -d
 ```
 
@@ -40,13 +43,14 @@ DB_PASSWORD=test-odoo
 ```
 
 This is an example of my `odoo.conf`
+
 ```conf
 # Check file odoo-sample.conf for more Odoo config (smtp, i18n,...)
 # Uncomment admin_passwd if you want to set the master password, a auto-generated password will provided at start-up if comment this line
-# Recommend leaving the setting at default 
+# Recommend leaving the setting at default
 
 [options]
-; admin_passwd = odoo-test 
+; admin_passwd = odoo-test
 addons_path = /mnt/extra-addons
 data_dir = /etc/odoo
 logfile = /etc/odoo/odoo-server.log
@@ -58,12 +62,9 @@ It will ask for editing `odoo.conf`, leave it default if you're not experienced.
 ![Alt text](screenshots/odoo.conf.jpg)
 ![Alt text](screenshots/.env.jpg)
 
-
-
 ![Alt text](screenshots/master-password.jpg)
 
 Check `localhost:10016` or the port you choose
-
 
 Restart `Odoo containers stack`
 
@@ -80,16 +81,18 @@ sudo nano ~/my-odoo/.env
 Remove all `Odoo containers stack` and the whole directory `my-odoo`
 
 ```bash
-sudo docker-compose -f ~/my-odoo/docker-compose.yml down && 
+sudo docker-compose -f ~/my-odoo/docker-compose.yml down &&
 sudo rm -rf ~/my-odoo
 ```
 
 Check log
+
 ```bash
 cat ~/my-odoo/etc/odoo-server.log
 ```
 
 Remove all the directories created by odoo-docker (in case you change to another odoo/postgres version):
+
 ```bash
 sudo rm ~/my-odoo/etc/odoo-server.log
 sudo rm -rf ~/my-odoo/etc/sessions

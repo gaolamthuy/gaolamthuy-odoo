@@ -2,20 +2,51 @@ name: test deploy on staging stack
 on:
   push:
     branches:
-      - staging
+      - main
 
 jobs:
   test-stage:
-    if: ${{ github.event.pull_request.merged }}
+    # if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     steps:
       - name: git pull && docker-compose up
         uses: appleboy/ssh-action@master
-        with: 
-          host: ${{ secrets.HOST }}
+        with:
+          host: ${{ secrets.HOST_STAGE }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            sudo git -C ~/${{ github.event.repository.name }}-stage restore .
-            sudo git -C ~/${{ github.event.repository.name }}-stage pull 
-            sudo docker-compose -f ~/${{ github.event.repository.name }}-stage/docker-compose.stage.yml -p "odoo-gaolamthuy-stage" up --build --force-recreate -d
+
+            # Add any additional deployment commands
+            sudo echo "Deploying via SSH..."
+            git -C './${{ github.event.repository.name }}' pull || git clone https://github.com/${{github.repository}}.git './${{ github.event.repository.name }}'
+
+            # Checkout to main branch
+            cd ~/${{ github.event.repository.name }}
+
+            # Checkout to main branch
+            git checkout main
+
+            # Create folders
+            mkdir -p postgresql/
+            mkdir -p etc/
+            mkdir -p addons/
+
+            # Gain permisson for all folder
+            sudo chmod -R 777 postgresql/
+            sudo chmod -R 777 etc/
+            sudo chmod -R 777 addons/
+
+            # Remove the old .env file if it exists
+            sudo rm -f .env
+            # Create a new .env file with secrets
+            echo "${{ secrets.DOTENV }}" | sudo tee -a .env
+
+            # Run docker compose as staging
+            docker compose -p ${{ github.event.repository.name }} -f ./docker-compose.yml -f ./docker-compose.stage.yml up -d --build --force-recreate
+
+            docker system prune --volumes --force
+
+            sudo chmod -R 777 postgresql/
+
+            echo "done"

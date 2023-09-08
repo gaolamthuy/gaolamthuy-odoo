@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  postgres-db:
+    image: postgres:${PG_VERSION:-15}
+    user: root
+    environment:
+      - POSTGRES_USER=${DB_USER:-my-odoo}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-my-odoo}
+      - POSTGRES_DB=postgres
+    restart: always # run as a service
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+
+  odoo-app:
+    image: odoo:${ODOO_VERSION:-16}
+    user: root
+    depends_on:
+      - postgres-db
+    tty: true
+    command: --
+    environment:
+      - HOST=postgres-db
+      - USER=${DB_USER:-my-odoo}
+      - PASSWORD=${DB_PASSWORD:-my-odoo}
+    volumes:
+      #- /etc/timezone:/etc/timezone:ro
+      #- /etc/localtime:/etc/localtime:ro
+      # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    restart: always # run as a service
+
