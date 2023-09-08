@@ -26,6 +26,7 @@ jobs:
 
             # Checkout to main branch
             git checkout main
+            git pull
 
             # Create folders
             mkdir -p postgresql/
