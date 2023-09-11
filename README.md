@@ -102,3 +102,9 @@ CD
 ```bash
 sudo git pull
 ```
+
+After creating a new database:
+
+```
+reserved
+```
