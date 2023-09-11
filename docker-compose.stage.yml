@@ -21,6 +21,8 @@ services:
     container_name: postgres-db-${STAGE_DOMAIN:-staging.domain.com}
     networks:
       - caddy
+    environment:
+      - HOST=postgres-db-${STAGE_DOMAIN:-staging.domain.com}
 
 networks:
   caddy:

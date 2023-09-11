@@ -21,6 +21,8 @@ services:
     container_name: postgres-db-${PROD_DOMAIN:-domain.com}
     networks:
       - caddy
+    environment:
+      - HOST=postgres-db-${PROD_DOMAIN:-domain.com}
 
 networks:
   caddy:

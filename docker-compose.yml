@@ -18,8 +18,7 @@ services:
       - postgres-db
     tty: true
     command: --
-    environment:
-      - HOST=postgres-db
+
       - USER=${DB_USER:-my-odoo}
       - PASSWORD=${DB_PASSWORD:-my-odoo}
     volumes:
