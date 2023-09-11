@@ -6,6 +6,8 @@ services:
     ports:
       - "${APP_PORT:-8069}:8069"
       - "${CHAT_PORT:-8072}:8072" # live chat
+    environment:
+      - HOST=postgres-db-${STAGE_DOMAIN:-staging.domain.com}
     networks:
       - caddy
     labels:
@@ -21,8 +23,6 @@ services:
     container_name: postgres-db-${STAGE_DOMAIN:-staging.domain.com}
     networks:
       - caddy
-    environment:
-      - HOST=postgres-db-${STAGE_DOMAIN:-staging.domain.com}
 
 networks:
   caddy:
